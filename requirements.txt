@@ -3,3 +3,7 @@ pandas
 numpy
 faker
 fastparquet
+elasticsearch-loader[parquet]
+elasticsearch==7.17.1
+streamlit
+folium
