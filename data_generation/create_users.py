@@ -61,9 +61,12 @@ def run():
     # drop the user id column
     merged_df = merged_df.drop(columns=['user_id'])
     
+    # convert the postal code to int
+    # merged_df['zip'] = merged_df['zip'].replace(',', '')
+    
     print(merged_df.head(1).to_json())
     
-    merged_df.to_parquet("data/app-scans.parquet.gzip", compression="gzip")
+    merged_df.to_parquet("data/app-scans.parquet.gzip", compression="gzip", use_dictionary=False)
     # JSON export for visual analysis and testing
     merged_df.to_json("data/app-scans.json", orient="records", lines=True)
     
