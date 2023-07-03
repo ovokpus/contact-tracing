@@ -1,5 +1,3 @@
-# import re
-# from turtle import window_height
 import streamlit as st
 import pandas as pd
 from elasticsearch import Elasticsearch
