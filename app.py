@@ -1,5 +1,5 @@
 import streamlit as st
-import helpers
+import elasticsearch.helpers as helpers
 
 # Ensure the entire page is loaded
 st.set_page_config(layout="wide")
