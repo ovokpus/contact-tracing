@@ -1,4 +1,5 @@
-import re
+# import re
+# from turtle import window_height
 import streamlit as st
 import pandas as pd
 from elasticsearch import Elasticsearch
@@ -56,7 +57,7 @@ def epoch_to_timestamp(df):
 def get_folium_map(df):
     # Print the folium map
     map = folium.Map(location=[df.iloc[0]['latitude'],
-                     df.iloc[0]['longitude']], zoom_start=12)
+                     df.iloc[0]['longitude']], zoom_start=15)
 
     # Add the markers to the map
     for _, row in df.iterrows():

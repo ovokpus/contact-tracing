@@ -4,16 +4,15 @@ import helpers
 # Ensure the entire page is loaded
 st.set_page_config(layout="wide")
 
-# Add title to sidebar
-st.sidebar.title("San Francisco business App Scan Tracker")
-
-# Add a separator
+# Add Header and title to the sidebar
+st.header("The :red[San Francisco] :green[business] :violet[App Scan] :orange[Tracker] :earth_americas:")
+st.sidebar.title(":blue[Search by: ] ")
 my_separator = "---"
 st.sidebar.markdown(my_separator, unsafe_allow_html=False)
 
-"""Search by free text"""
+""":violet[Search by Free Text]"""
 ############################################
-text = st.sidebar.text_input("Free text search")
+text = st.sidebar.text_input(":orange[Free text search]")
 
 # add the link to the map below the code
 st.sidebar.markdown("### [Map](https://www.google.com/maps/search/?api=1&query=37.76,-122.4)")
@@ -26,8 +25,8 @@ if text:
     df, free_text_df = helpers.free_text_search(text)
     
     # Add table with  a headline and print the table
-    st.subheader("Businesses for search term: " + text)
-    free_text_table = st.dataframe(data=free_text_df)
+    st.subheader(":green[Businesses for search term:] " + text)
+    free_text_table = st.dataframe(data=free_text_df, width=1200)
     
     # Print the folium map
     try:
@@ -35,10 +34,10 @@ if text:
     except IndexError:
         st.error(f"Search term '{text}' not found")
 
-"""Search By Postal Code"""
+""":violet[Search By Postal Code]"""
 ############################################
 # Add the input field for postal code
-postal_code = st.sidebar.text_input("Postal Code")
+postal_code = st.sidebar.text_input(":orange[Postal Code]")
 
 # Add the link to the map below the code
 link = "[All San Fransisco Zip Codes](https://www.usmapguide.com/california/san-francisco-zip-code-map/)"
@@ -54,8 +53,8 @@ if postal_code:
     
     
     # Add table with  a headline and print the table
-    st.subheader("Businesses in postal code: " + postal_code)
-    postal_code_table = st.dataframe(data=postal_code_df)
+    st.subheader(":green[Businesses in postal code:] " + postal_code)
+    postal_code_table = st.dataframe(data=postal_code_df, width=1200)
     
     # Print the folium map
     try:
@@ -63,10 +62,10 @@ if postal_code:
     except IndexError:
         st.error("Invalid postal code")
     
-"""Search by Business ID"""
+""":violet[Search by Business ID]"""
 ############################################
 # Add the input field on the sidebar
-business_id = st.sidebar.text_input("Business ID")
+business_id = st.sidebar.text_input(":orange[Business ID]")
 
 # Add a separator
 my_separator = "---"
@@ -81,12 +80,12 @@ if business_id:
         business_id_df = None
     
     # Add table with  a headline and print the table
-    st.subheader("Users scanned at this business: " + business_id)
-    business_id_table = st.dataframe(data=business_id_df)
+    st.subheader(":green[Users scanned at this business:] " + business_id)
+    business_id_table = st.dataframe(data=business_id_df, width=1200)
     
-"""Search by Device ID"""
+""":violet[Search by Device ID]"""
 ############################################
-device_id = st.sidebar.text_input("Device ID")
+device_id = st.sidebar.text_input(":orange[Device ID]")
 
 if device_id:
     try:
@@ -96,8 +95,8 @@ if device_id:
         device_id_df = None
     
     # Add a table with the headline and print the table
-    st.header("Scans from device: " + device_id)
-    device_id_table = st.dataframe(data=device_id_df)
+    st.subheader(":green[Scans from device:] " + device_id)
+    device_id_table = st.dataframe(data=device_id_df, width=1200)
     
     # add the folium maps
     if device_id_df is not None:
