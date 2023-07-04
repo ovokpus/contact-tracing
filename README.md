@@ -3,7 +3,6 @@
 This is a simple application that performs Contact Tracing using an <b>Elasticsearch</b> backend written in Python, and a Streamlit Frontend.
 
 ---
-
 ![image](https://github.com/ovokpus/contact-tracing/blob/main/img/app%20tracker%20header.png)
 
 ---
@@ -70,9 +69,9 @@ pip install elasticsearch-loader[parquet]
 ```
 
 ### Dataset Preparation
-We begin with writing in the source dataset from a csv file, with some preprocessing transformations that saves the data into a json format. The `Business Location` column is loaded into a JSON format and json-normalized, in the script [`process-data.py`]()
+We begin with writing in the source dataset from a csv file, with some preprocessing transformations that saves the data into a json format. The `Business Location` column is loaded into a JSON format and json-normalized, in the script [`process-data.py`](https://github.com/ovokpus/contact-tracing/blob/main/data_generation/process-data.py)
 
-After that, the data is enriched by the generation of User data using the python [`faker`]() package. This generated data is now merged with the SF Business Locations data, and app scan timestamp values are generated and added to the merged dataframe, which is then saved as a compressed parquet file (to save storage space) before it is fed into Elasticsearch.
+After that, the data is enriched by the generation of User data using the python [`faker`](https://faker.readthedocs.io/en/master/) package. This generated data is now merged with the SF Business Locations data, and app scan timestamp values are generated and added to the merged dataframe, which is then saved as a compressed parquet file (to save storage space) before it is fed into Elasticsearch.
 
 ```python
 # merge the two dataframes
@@ -106,7 +105,7 @@ A view of the data in Elasticsearch
 ### Creating the streamlit application
 A streamlit application is written with helper functions that process the data from within Elasticsearch, modularized and abstracted for proper organization. Various search parameters were created. We can search by Free Text, Postal Code, Business ID or Device ID of the users, at the various locations, which are rendered in a table as well as a folium map, which leverages Elasticsearch's ability to support geospatial data.
 
-Here is an example of the Free Text Search created in `app.py` and it's use of wrappers that query Elasticsearch from within `helpers.py`
+Here is an example of the Free Text Search created in [`app.py`](https://github.com/ovokpus/contact-tracing/blob/main/app.py) and it's use of wrappers that query Elasticsearch from within [`helpers.py`](https://github.com/ovokpus/contact-tracing/blob/main/src/helpers.py)
 
 `app.py`
 ```python
