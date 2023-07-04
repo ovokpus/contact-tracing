@@ -4,7 +4,7 @@ This is a simple application that performs Contact Tracing using an <b>Elasticse
 
 ---
 
-![image]()
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/app%20tracker%20header.png)
 
 ---
 
@@ -19,7 +19,7 @@ The dataset used for this project is the [San Fransisco Registered Business Loca
 ## Why Elasticsearch, instead of a Relational Database?
 Elasticsearch is an open-source, distributed search and analytics engine built on top of Apache Lucene. It is designed to handle large volumes of data and provide real-time search, analysis, and visualization capabilities. Elasticsearch is part of the Elastic Stack, which includes other components like Kibana, Logstash, and Beats, providing a comprehensive solution for data ingestion, storage, analysis, and visualization.
 
-![image]()
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/elasticsearch_logo.png)
 
 Key features and advantages of Elasticsearch that makes it preferrable to a traditional Relational Database Management System (RDBMS) are given below:
 
@@ -98,10 +98,10 @@ elasticsearch_loader --index my_app_scans --type scans parquet ~/contact-tracing
 ```
 
 Elasticsearch UI showing the Index created
-![image]()
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/elasticsearch_index.png)
 
 A view of the data in Elasticsearch
-![image]()
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/elasticsearch_data.png)
 
 ### Creating the streamlit application
 A streamlit application is written with helper functions that process the data from within Elasticsearch, modularized and abstracted for proper organization. Various search parameters were created. We can search by Free Text, Postal Code, Business ID or Device ID of the users, at the various locations, which are rendered in a table as well as a folium map, which leverages Elasticsearch's ability to support geospatial data.
@@ -185,9 +185,10 @@ streamlit run app.py
 ```
 
 Streamlit app UI
-![image]()
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/streamlit_ui_top.png)
 
-![image]()
+Streamlit search example
+![image](https://github.com/ovokpus/contact-tracing/blob/main/img/streamlit_ui_search_example.png)
 
 ### Summary and next steps
 1. Create a client that writes new scans (a scanning plugin) into Elasticsearch to update the database
