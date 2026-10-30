@@ -162,3 +162,11 @@ cython_debug/
 **data/**
 
 .vscode/
+# local app
+.venv/
+.env
+data/
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+.DS_Store
