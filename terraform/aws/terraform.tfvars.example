@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars (git-ignored) and edit. Placeholders only.
+region = "us-east-1"
+image_tag = "v1"
+# es_url = "https://elastic:<password>@<deployment>.es.<region>.elastic-cloud.com:443"  # sensitive: prefer TF_VAR_es_url

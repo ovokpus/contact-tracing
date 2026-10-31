@@ -170,3 +170,13 @@ node_modules/
 frontend/dist/
 *.tsbuildinfo
 .DS_Store
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform.tfstate.lock.info
+crash.log
+.terraform.lock.hcl
