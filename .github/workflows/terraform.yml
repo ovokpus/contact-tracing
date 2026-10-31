@@ -1,0 +1,61 @@
+name: terraform
+
+on:
+  push:
+    branches: [main]
+    paths: ["terraform/**", ".tflint/**", ".github/workflows/terraform.yml"]
+  pull_request:
+    paths: ["terraform/**", ".tflint/**", ".github/workflows/terraform.yml"]
+
+permissions:
+  contents: read
+
+# Static checks only. Nothing here talks to a cloud: no credentials, no plan, no apply.
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cloud: [gcp, azure, aws]
+    env:
+      TF_PLUGIN_CACHE_DIR: ${{ github.workspace }}/.terraform.d/plugin-cache
+    steps:
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "~1.17"
+      - run: mkdir -p "$TF_PLUGIN_CACHE_DIR"
+      - name: terraform fmt
+        run: terraform fmt -check -recursive terraform/${{ matrix.cloud }}
+      - name: terraform init + validate (no backend)
+        run: |
+          for d in terraform/${{ matrix.cloud }}/; do
+            echo "::group::$d"
+            terraform -chdir="$d" init -backend=false -input=false -no-color
+            terraform -chdir="$d" validate -no-color
+            echo "::endgroup::"
+          done
+      - uses: terraform-linters/setup-tflint@v6
+      - name: tflint
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          case "${{ matrix.cloud }}" in gcp) r=google;; azure) r=azurerm;; aws) r=aws;; esac
+          cfg="$GITHUB_WORKSPACE/.tflint/$r.hcl"
+          tflint --init --config "$cfg"
+          for d in terraform/${{ matrix.cloud }}/; do
+            tflint --chdir="$d" --config "$cfg" --format compact
+          done
+
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: checkov (soft fail, report only)
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: terraform
+          framework: terraform
+          soft_fail: true
+          quiet: true

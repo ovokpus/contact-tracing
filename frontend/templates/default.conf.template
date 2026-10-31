@@ -1,0 +1,10 @@
+# Rendered by the nginx image's envsubst step at start-up. API_UPSTREAM defaults
+# to the compose service; Terraform sets it to the API's public HTTPS URL.
+server {
+  listen 80;
+  root /usr/share/nginx/html;
+  client_max_body_size 12m;
+  location /api/ { proxy_pass ${API_UPSTREAM}; proxy_ssl_server_name on; proxy_read_timeout 120s; }
+  location /health { proxy_pass ${API_UPSTREAM}; proxy_ssl_server_name on; }
+  location / { try_files $uri /index.html; }
+}
