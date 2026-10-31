@@ -1,5 +1,7 @@
 # 🧬 SF App-Scan Contact Tracer
 
+<p align="center"><img src="assets/banner.jpg" alt="Street map with brass pins linked by red string under emerald and ember light" width="100%"></p>
+
 <p align="center"><img src="docs/assets/hero.svg" alt="SF App-Scan Contact Tracer" width="100%"/></p>
 
 > Trace people's movements through app check-ins at San Francisco businesses, and find who they were in contact with.
