@@ -1,5 +1,7 @@
 # 🧬 SF App-Scan Contact Tracer
 
+<p align="center"><img src="docs/assets/hero.svg" alt="SF App-Scan Contact Tracer" width="100%"/></p>
+
 > Trace people's movements through app check-ins at San Francisco businesses, and find who they were in contact with.
 > Built on **Elasticsearch** (geo points, time-range and full-text queries) with a **FastAPI** API and a **React + Leaflet** UI.
 > One `docker compose up`.
@@ -15,6 +17,8 @@
 Someone tests positive. **Where were they, and who scanned into the same places at about the same time?** This is a natural fit for a search engine: filter by device, then by business and time window, then rank. Elasticsearch does this in milliseconds, and it indexes the geo coordinates for map and distance queries.
 
 ## 2. Architecture
+
+<p align="center"><img src="docs/assets/flow.svg" alt="SF App-Scan Contact Tracer data flow" width="100%"/></p>
 
 ```mermaid
 flowchart LR
