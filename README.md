@@ -12,6 +12,10 @@
 
 ---
 
+## Business case
+
+After an incident at a site, a safety team needs to know who was nearby, and building that list from raw check-in logs takes hours. This app indexes check-ins in Elasticsearch and returns everyone at the same place within a time window, on a map. All data in the repo is synthetic, and real use needs strict privacy controls. [docs/BUSINESS_CASE.md](docs/BUSINESS_CASE.md) covers the use cases, an illustrative ROI model and the limits.
+
 ## 1. The problem
 
 Someone tests positive. **Where were they, and who scanned into the same places at about the same time?** This is a natural fit for a search engine: filter by device, then by business and time window, then rank. Elasticsearch does this in milliseconds, and it indexes the geo coordinates for map and distance queries.
